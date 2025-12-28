@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JobPilot - AI-Powered Job Search Automation
 
-## Getting Started
+JobPilot is an intelligent job search platform that automates the tedious parts of job hunting. Upload your resume once, set your preferences, and let AI find, score, and create personalized application materials for relevant opportunities.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 🎯 Smart Job Matching
+- AI-powered job scoring (0-100) based on your resume
+- Automated LinkedIn job search via n8n workflows
+- Filter by experience level, location, job type, and work arrangement
+
+### ✍️ Auto-Generated Application Materials
+- Personalized cover letters for each job match
+- Custom hiring manager email drafts
+- Tailored to specific job descriptions and your background
+
+### ⚡ Async Processing
+- Background job searches - start a search and check back in minutes
+- Real-time status updates
+- Process multiple searches simultaneously
+
+### 🎨 Modern UI
+- Built with Next.js 14 and shadcn/ui components
+- Responsive design for all devices
+- Gradient themes and smooth animations
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 14 (App Router), React, TypeScript
+- **UI Components**: shadcn/ui, Tailwind CSS, Lucide Icons
+- **Backend**: Next.js API Routes
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Storage**: Supabase Storage (for resumes)
+- **Automation**: n8n (workflow automation)
+- **AI**: Claude API (via n8n)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Supabase account
+- n8n instance (self-hosted or cloud)
+- Claude API key
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+```bash
+git clone https://github.com/chintalaanvesh/jobpilot-ai-agent.git
+cd jobpilot-ai-agent
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+```bash
+npm install
+```
 
-## Learn More
+3. Set up Supabase:
+   - Run the SQL migrations in `supabase/migrations/`
+   - Create a storage bucket named `resumes`
 
-To learn more about Next.js, take a look at the following resources:
+4. Configure n8n workflow:
+   - Import workflow from project documentation
+   - Add your Claude API credentials
+   - Update webhook URLs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Run the development server:
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+6. Open [http://localhost:3000](http://localhost:3000)
 
-## Deploy on Vercel
+### Building for Production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
+
+```
+jobpilot/
+├── app/                    # Next.js app directory
+│   ├── actions/           # Server actions
+│   ├── api/               # API routes
+│   ├── dashboard/         # Dashboard pages
+│   ├── login/             # Login page
+│   └── signup/            # Signup page
+├── components/            # React components
+│   ├── ui/                # shadcn/ui components
+│   ├── auth/              # Auth forms
+│   └── resume/            # Resume upload
+├── lib/                   # Utilities
+│   ├── supabase/          # Supabase clients
+│   └── utils.ts           # Helper functions
+├── supabase/              # Database migrations
+└── proxy.ts               # Next.js proxy (auth middleware)
+```
+
+## 🔧 How It Works
+
+1. **Sign Up**: Create an account and upload your resume (PDF)
+2. **Configure Search**: Set job search criteria
+3. **AI Processing**: n8n searches LinkedIn and Claude AI scores each job
+4. **Review Results**: Get matched jobs with scores, cover letters, and email drafts
+5. **Apply**: Use the generated materials to apply on LinkedIn
+
+## 📄 License
+
+MIT License
+
+---
+
+Built with ❤️ using Next.js, Supabase, and n8n
