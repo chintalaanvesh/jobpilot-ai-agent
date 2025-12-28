@@ -56,7 +56,14 @@ export function SignupForm() {
         return;
       }
 
-      // Sign in the user after successful signup
+      // Check if email confirmation is required
+      if (result.requiresEmailConfirmation) {
+        toast.success('Account created! Please check your email to verify your account.');
+        router.push('/auth/check-email');
+        return;
+      }
+
+      // If no email confirmation required, sign in automatically
       const supabase = createClient();
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email,

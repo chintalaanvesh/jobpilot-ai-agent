@@ -18,7 +18,10 @@ export async function signupWithResume(formData: FormData) {
 
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
-      password
+      password,
+      options: {
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback`
+      }
     });
 
     if (authError) {
@@ -57,7 +60,11 @@ export async function signupWithResume(formData: FormData) {
       // Don't fail signup if profile creation fails
     }
 
-    return { success: true };
+    // Return success with info about email confirmation
+    return {
+      success: true,
+      requiresEmailConfirmation: !authData.session // If no session, email confirmation is required
+    };
   } catch (error) {
     console.error('Signup error:', error);
     return { error: 'An unexpected error occurred' };
