@@ -22,6 +22,8 @@
 
 Searches run asynchronously in the background — start a search, check back in minutes.
 
+https://github.com/user-attachments/assets/1b279639-e0da-4e3d-8a8c-08dcc76fceab
+
 ---
 
 ## Tech Stack
